@@ -1,3 +1,5 @@
+## Beginner Tutorials for Publisher and Subscriber Nodes
+
 ## Overview
 This is a ROS package that shows the working of a publisher and a subscriber node. The publisher node publishes a topic (Which here is a custom string message) and the subscriber node subscribes to this topic.
 
@@ -31,5 +33,5 @@ rosrun beginner_tutorials listener
 ```
 
 ## Assumptions/Dependencies
-ROS distro used here is: 'Kinetic'. 
-Minimum version of CMake required is: 2.8.3
+1) ROS distro used here is: 'Kinetic'. 
+2) Minimum version of CMake required is: 2.8.3
