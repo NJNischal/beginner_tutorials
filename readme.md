@@ -31,5 +31,5 @@ rosrun beginner_tutorials listener
 ```
 
 ## Assumptions/Dependencies
-ROS distro used here is Kinetic
-Minimum version of CMake required: 2.8.3
+ROS distro used here is: 'Kinetic'. 
+Minimum version of CMake required is: 2.8.3
