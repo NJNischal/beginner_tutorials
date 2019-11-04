@@ -77,7 +77,7 @@ int main(int argc, char **argv) {
 
   ros::init(argc, argv, "talker");
 
-  // declaring an int variable to denote loop frequency which set to 10Hz (default)
+  // declaring variable to denote loop frequency to 10Hz (default)
   int loopRate = 10;
 
   // converts string argument to int
