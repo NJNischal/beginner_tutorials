@@ -44,9 +44,9 @@ extern std::string defaultMessage = "Hello World";
 
 bool changeText(beginner_tutorials::editString::Request &request_data,
                    beginner_tutorials::editString::Response &response_service) {
-  defaultMessage = request_data.inputString;
+  defaultMessage = request_data.inputText;
   ROS_WARN_STREAM("Client has modified the default text to :");
-  response_service.modifiedString = request_data.inputString;
+  response_service.editedText = request_data.inputText;
 
   return true;
 }
