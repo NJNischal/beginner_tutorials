@@ -1,22 +1,67 @@
+/**
+*Copyright (c) 2019 Nagireddi Jagadesh Nischal
+*
+*Redistribution and use in source and binary forms, with or without modification, are permitted *provided that the following conditions are met:
+*
+*1. Redistributions of source code must retain the above copyright notice, this list of conditions and *the following disclaimer.
+*
+*2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions *and the following disclaimer in the documentation and/or other materials provided with the *distribution.
+*
+*3. Neither the name of the copyright holder nor the names of its contributors may be used to endorse *or promote products derived from this software without specific prior written permission.
+*
+*THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR *IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND *FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR *CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL *DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, *DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER *IN *CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT *OF THE *USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+**/
+
+
 /*
  * @copyright 2019
- * @copyright BSD License
+ * @copyright BSD 3-Clause
  * @file talker.cpp
- * Design
  * @author Nagireddi Jagadesh Nischal
- * @date 10/28/2019
- * @brief Implementation of Pubisher node with custom string message
+ * @date 11/03/2019
+ * @brief Implementation of ROS Pubisher node with custom string message
  */
 
 #include <sstream>
 #include "ros/ros.h"
 #include "std_msgs/String.h"
+#include "beginner_tutorials/editString.h"
 
+
+/**
+ * Default string message
+ */
+extern std::string defaultMessage = "Hello World";
+
+
+/**
+ * @brief  callback function for editString Service
+ * @param  request_data   The request data that is sent to the service
+ * @param  response_service   The response given by the service to the client
+ * @return bool
+ */
+
+bool changeText(beginner_tutorials::editString::Request &request_data,
+                   beginner_tutorials::editString::Response &response_service) {
+  defaultMessage = request_data.inputString;
+  ROS_WARN_STREAM("Client has modified the default text to :");
+  response_service.modifiedString = request_data.inputString;
+
+  return true;
+}
 
 
 /**
  * This tutorial demonstrates simple sending of messages over the ROS system.
  */
+
+/**
+ * @brief      the main function of the talker file
+ * @param      argc  Specifies the number of elements within argv
+ * @param      argv  Array of c-string pointers
+ * @return     0 int
+ */
+
 int main(int argc, char **argv) {
   /**
    * The ros::init() function needs to see argc and argv so that it can perform
@@ -29,6 +74,34 @@ int main(int argc, char **argv) {
    * part of the ROS system.
    */
   ros::init(argc, argv, "talker");
+
+  // declaring an int variable to denote loop frequency which set to 10Hz (default)
+  int loopRate = 10;
+
+  // converts string argument to int
+  if (argc > 1) {
+    loopRate = atoi(argv[1]);
+  }
+
+
+if (loopRate > 0) {
+    ROS_DEBUG_STREAM("The loop is operating at frequency of (Hz): "<< loopRate);
+  } else if (loopRate < 0) {
+    ROS_ERROR_STREAM("The input frequency cannot be less than Zero");
+
+    ROS_WARN_STREAM("Correction: Defaulting frequency back to 10Hz");
+
+    // Reset loopRate back to default (10Hz)
+    loopRate = 10;
+  } else if (loopRate == 0) {
+    ROS_FATAL_STREAM("The input frequency cannot be Zero");
+
+    ROS_WARN_STREAM("Correction: Defaulting frequency back to 10Hz");
+
+    // Reset loopRate back to default (10Hz)
+    loopRate = 10;
+}
+
 
   /**
    * NodeHandle is the main access point to communications with the ROS system.
@@ -56,7 +129,9 @@ int main(int argc, char **argv) {
    */
   ros::Publisher chatter_pub = n.advertise<std_msgs::String>("chatter", 1000);
 
-  ros::Rate loop_rate(10);
+  auto server = n.advertiseService("editString", changeText);
+
+  ros::Rate loop_rate(loopRate);
 
   /**
    * A count of how many messages we have sent. This is used to create
@@ -70,7 +145,7 @@ int main(int argc, char **argv) {
     std_msgs::String msg;
 
     std::stringstream ss;
-    ss << "Hello 808X, this is Nischal, the count is: " << count;
+    ss << "Hello 808X, this is Nischal.";
     msg.data = ss.str();
 
     ROS_INFO("%s", msg.data.c_str());
