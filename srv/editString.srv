@@ -1,0 +1,6 @@
+# request
+string inputText
+
+---
+# response 
+string editedText
