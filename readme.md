@@ -50,9 +50,12 @@ rosservice call /editString "This is the newly modified string message"
 
 ## RQT console, logger
 To run the RQT console and logger, type the following codes in two new terminals:
+For console:
 '''
 rqt_console
-
+'''
+For logger:
+'''
 rosrun rqt_logger_level rqt_logger_level
 '''
 
