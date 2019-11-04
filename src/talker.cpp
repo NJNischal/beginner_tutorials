@@ -1,4 +1,5 @@
 /**
+*
 *Copyright (c) 2019 Nagireddi Jagadesh Nischal
 *
 *Redistribution and use in source and binary forms, with or without modification, are permitted *provided that the following conditions are met:
@@ -73,6 +74,7 @@ int main(int argc, char **argv) {
    * You must call one of the versions of ros::init() before using any other
    * part of the ROS system.
    */
+
   ros::init(argc, argv, "talker");
 
   // declaring an int variable to denote loop frequency which set to 10Hz (default)
@@ -84,20 +86,17 @@ int main(int argc, char **argv) {
   }
 
 
+
 if (loopRate > 0) {
     ROS_DEBUG_STREAM("The loop is operating at frequency of (Hz): "<< loopRate);
   } else if (loopRate < 0) {
     ROS_ERROR_STREAM("The input frequency cannot be less than Zero");
-
     ROS_WARN_STREAM("Correction: Defaulting frequency back to 10Hz");
-
     // Reset loopRate back to default (10Hz)
     loopRate = 10;
   } else if (loopRate == 0) {
     ROS_FATAL_STREAM("The input frequency cannot be Zero");
-
     ROS_WARN_STREAM("Correction: Defaulting frequency back to 10Hz");
-
     // Reset loopRate back to default (10Hz)
     loopRate = 10;
 }
