@@ -16,6 +16,11 @@ source /opt/ros/kinetic/setup.bash
 mkdir -p ~/catkin_ws/src 
 cd ~/catkin_ws/ 
 catkin_make
+source devel/setup.bash
+cd src/
+git clone https://github.com/NJNischal/beginner_tutorials.git
+cd ..
+catkin_make
 
 ```
 
@@ -36,28 +41,29 @@ rosrun beginner_tutorials listener
 ```
 
 ## Using roslaunch
-To use roslaunch file, type the following in the terminal
-'''
+```
+# To use roslaunch file, type the following in the terminal
 roslaunch begineer_tutorials week10HW.launch requency:=1
-'''
-Here we can set the frequency to any other value we like.
+# (Here we can set the frequency to any other value we like.)
+```
 
 ## ROS Service
-To change the output text string, please type the following in a new terminal after following the steps needed to source the workspace:
-'''
+```
+# To change the output text string, please type the following in a new terminal after following the steps needed to source the workspace:
 rosservice call /editString "This is the newly modified string message"
-'''
+```
 
 ## RQT console, logger
-To run the RQT console and logger, type the following codes in two new terminals:
-For console:
-'''
+```
+# To run the RQT console and logger, type the following codes in two new terminals:
+# (For console)
 rqt_console
-'''
-For logger:
-'''
+
+
+# (For logger)
+
 rosrun rqt_logger_level rqt_logger_level
-'''
+```
 
 
 ## Assumptions/Dependencies
