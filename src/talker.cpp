@@ -24,6 +24,7 @@
  */
 
 #include <sstream>
+#include <tf/transform_broadcaster.h>
 #include "ros/ros.h"
 #include "std_msgs/String.h"
 #include "beginner_tutorials/editString.h"
@@ -76,6 +77,10 @@ int main(int argc, char **argv) {
    */
 
   ros::init(argc, argv, "talker");
+
+  static tf::TransformBroadcaster br;
+  tf::Transform transform;
+
 
   // declaring variable to denote loop frequency to 10Hz (default)
   int loopRate = 10;
@@ -156,6 +161,22 @@ if (loopRate > 0) {
      * in the constructor above.
      */
     chatter_pub.publish(msg);
+
+
+    // Setting translation
+    transform.setOrigin(
+        tf::Vector3(cos(ros::Time::now().toSec()),
+                    sin(ros::Time::now().toSec()), 0.0));
+
+    tf::Quaternion q;
+    q.setRPY(0, 0, 1);
+
+    // set rotation
+    transform.setRotation(q);
+
+    // broadcast the transform
+    br.sendTransform(
+        tf::StampedTransform(transform, ros::Time::now(), "world", "talk"));
 
     ros::spinOnce();
 
