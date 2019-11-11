@@ -65,6 +65,44 @@ rqt_console
 rosrun rqt_logger_level rqt_logger_level
 ```
 
+## TF frames
+
+The talker node has been changed to boradcast static tf frames.To visualize the frames, use the following commands in the terminal seperately
+
+```
+rosrun rqt_tf_tree rqt_tf_tree
+rosrun tf tf_echo /world /talk
+rosrun tf view_frames
+```
+
+## Unit testing
+
+For testing the program, use the launch file in the test folder. 
+Run the following commands:
+```
+cd ~/catkin_ws
+catkin_make
+rostest beginner_tutorials talkerTest.launch
+```
+
+## Rosbag usage
+
+To run the ros bag, use the following command to start recording for 10 seconds: (Change the value to the desired amount of time in this command)
+
+```
+rosbag record --duration=10 -a -O rostopicsRecord.bag
+```
+This records for 10 seconds and saves it as a rosbag file. To play the rosbag file saved in my repo, run the following commands in new terminals:
+```
+cd ~/catkin_ws
+rosrun beginner_tutorials listener
+```
+In another terminal, type:
+```
+cd ~/catkin_ws/src/beginner_tutorials/results
+rosbag play rostopicsRecord.bag
+```
+
 
 ## Assumptions/Dependencies
 1) ROS distro used here is: 'Kinetic'. 
