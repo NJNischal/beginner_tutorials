@@ -49,3 +49,42 @@ auto client = nd.serviceClient<beginner_tutorials::editString>("editString");
 EXPECT_TRUE(client.waitForExistence(ros::Duration(5)));
 
 }
+
+
+/**
+ * @brief Tests if editString service can replace the string 
+ * @param testTalkerNode  gtest framework
+ * @param testServiceMessageUpdate  test name
+ */
+
+TEST(testTalkerNode, testServiceMessageUpdate) {
+
+// Create the node handle
+  
+ros::NodeHandle nd;
+
+  
+// Register the client to the service
+  
+auto client = nd.serviceClient<beginner_tutorials::editString>("editString");
+  
+// Initialize the service to srv object
+  
+beginner_tutorials::editString srv;
+
+  
+// edit input string
+  
+srv.request.inputText = "testMessage";
+
+  
+// request the server
+  
+client.call(srv.request, srv.response);
+
+  
+// tests to check output
+  
+EXPECT_STREQ("testMessage", srv.response.editedText.c_str());
+
+}
