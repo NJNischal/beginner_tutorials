@@ -94,7 +94,7 @@ We get the following output:
 
 ## Rosbag usage
 
-To run the ros bag, use the following command to start recording for 10 seconds: (Change the value to the desired amount of time in this command)
+To run the ros bag, use the following command to start recording for 15 seconds: (Change the value to the desired amount of time in this command)
 
 ```
 rosbag record --duration=15 -a -O rostopicsRecord.bag
