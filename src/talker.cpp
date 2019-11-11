@@ -23,9 +23,9 @@
  * @brief Implementation of ROS Pubisher node with custom string message
  */
 
-#include <sstream>
 #include <tf/transform_broadcaster.h>
 #include "ros/ros.h"
+#include "Folder/talker.h"
 #include "std_msgs/String.h"
 #include "beginner_tutorials/editString.h"
 
@@ -33,7 +33,7 @@
 /**
  * Default string message
  */
-extern std::string defaultMessage = "Output edited by Nischal";
+DefaultMessage mesDefault;
 
 
 /**
@@ -45,7 +45,7 @@ extern std::string defaultMessage = "Output edited by Nischal";
 
 bool changeText(beginner_tutorials::editString::Request &request_data,
                    beginner_tutorials::editString::Response &response_service) {
-  defaultMessage = request_data.inputText;
+  mesDefault.defaultMessage = request_data.inputText;
   ROS_WARN_STREAM("Client has modified the default text to :");
   response_service.editedText = request_data.inputText;
 
@@ -149,7 +149,7 @@ if (loopRate > 0) {
     std_msgs::String msg;
 
     std::stringstream ss;
-    ss << defaultMessage;
+    ss << mesDefault.defaultMessage;
     msg.data = ss.str();
 
     ROS_INFO("%s", msg.data.c_str());
