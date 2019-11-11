@@ -112,6 +112,24 @@ rosbag play rostopicsRecord.bag
 
 
 ## Assumptions/Dependencies
+
 1) ROS distro used here is: 'Kinetic'. 
 2) Minimum version of CMake required is: 2.8.3
 3) Ubuntu version used: 16.04 LTS
+
+## Tagging and Merging through terminal
+
+Run the following command inside the package folder to tag the branch
+```
+git tag -a Week11_HW_Release -m "week11_hw tag"
+```
+# Merge with master branch
+Open a terminal inside the package folder and enter:
+```
+git checkout master
+```
+
+and then enter the command:
+```
+git merge origin Week11_HW
+```
