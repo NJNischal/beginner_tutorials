@@ -35,19 +35,12 @@
  * @param  serviceExistanceTest   test name
  */
 TEST(testTalkerNode, testServiceExistance) {
-  
 // Create the node handle
-  
 ros::NodeHandle nd;
-  
 // Registering the client to service
-
 auto client = nd.serviceClient<beginner_tutorials::editString>("editString");
-
 // Checking for service existance
-
 EXPECT_TRUE(client.waitForExistence(ros::Duration(5)));
-
 }
 
 
@@ -56,35 +49,17 @@ EXPECT_TRUE(client.waitForExistence(ros::Duration(5)));
  * @param testTalkerNode  gtest framework
  * @param testServiceMessageUpdate  test name
  */
-
 TEST(testTalkerNode, testServiceMessageUpdate) {
-
 // Create the node handle
-  
 ros::NodeHandle nd;
-
-  
 // Register the client to the service
-  
 auto client = nd.serviceClient<beginner_tutorials::editString>("editString");
-  
 // Initialize the service to srv object
-  
 beginner_tutorials::editString srv;
-
-  
 // edit input string
-  
 srv.request.inputText = "testMessage";
-
-  
 // request the server
-  
 client.call(srv.request, srv.response);
-
-  
 // tests to check output
-  
 EXPECT_STREQ("testMessage", srv.response.editedText.c_str());
-
 }
