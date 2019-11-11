@@ -33,7 +33,7 @@
 /**
  * Default string message
  */
-extern std::string defaultMessage = "Hello World";
+extern std::string defaultMessage = "Output edited by Nischal";
 
 
 /**

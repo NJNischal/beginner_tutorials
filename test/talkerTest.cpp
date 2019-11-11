@@ -26,7 +26,7 @@
 #include <gtest/gtest.h>
 #include <ros/ros.h>
 #include <ros/service_client.h>
-#include "beginner_tutorials/changeText.h"
+#include "beginner_tutorials/editString.h"
 #include "std_msgs/String.h"
 
 /**
