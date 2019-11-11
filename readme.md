@@ -84,6 +84,13 @@ cd ~/catkin_ws
 catkin_make
 rostest beginner_tutorials talkerTest.launch
 ```
+We get the following output:
+
+</p>
+<p align="center">
+<img src="/Results/UnitTest.png">
+</p>
+</p>
 
 ## Rosbag usage
 
@@ -99,7 +106,7 @@ rosrun beginner_tutorials listener
 ```
 In another terminal, type:
 ```
-cd ~/catkin_ws/src/beginner_tutorials/results
+cd ~/catkin_ws/src/beginner_tutorials/Results
 rosbag play rostopicsRecord.bag
 ```
 
