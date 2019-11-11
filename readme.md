@@ -97,9 +97,9 @@ We get the following output:
 To run the ros bag, use the following command to start recording for 10 seconds: (Change the value to the desired amount of time in this command)
 
 ```
-rosbag record --duration=10 -a -O rostopicsRecord.bag
+rosbag record --duration=15 -a -O rostopicsRecord.bag
 ```
-This records for 10 seconds and saves it as a rosbag file. To play the rosbag file saved in my repo, run the following commands in new terminals:
+This records for 15 seconds and saves it as a rosbag file. To play the rosbag file saved in my repo, run the following commands in new terminals:
 ```
 cd ~/catkin_ws
 rosrun beginner_tutorials listener
